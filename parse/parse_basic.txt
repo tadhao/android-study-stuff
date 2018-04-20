@@ -1,0 +1,101 @@
+ 
+ //Parse entry restriction
+			if(ParseUser.getCurrentUser() != null){
+				Intent intent= new Intent(getApplicationContext(),ListActivity.class);
+				startActivity(intent);
+				Log.i("Info", "newActivity wil start now");
+				}
+				
+				
+//Parse signin
+			 ParseUser  user2 = new ParseUser();
+                        user2.setUsername(usernameEditText.getText().toString());
+                        user2.setPassword(passwordEditText.getText().toString());
+                        user2.signUpInBackground(new SignUpCallback() {
+                            @Override
+                            public void done(ParseException ee) {
+                                if (ee == null) {
+                                    Toast.makeText(getApplicationContext(), "Congratulations! You have signed in successfully", Toast.LENGTH_SHORT).show();
+                                     Log.i("SignupStatus", "Successful");
+                                    showUserList();
+                                } else {
+                                    Toast.makeText(getApplicationContext(), ee.getMessage().substring(ee.getMessage().indexOf(" ")), Toast.LENGTH_SHORT).show();
+                                    Log.i("errorMsg", ee.getMessage());
+                                }
+
+                            }
+                        });
+						
+						
+//Parse Login with formValidation
+			   if (usernameEditText.getText().toString().matches("") || 			passwordEditText.getText().toString().matches("")) {
+					Toast.makeText(getApplicationContext(), "Username or Password field is required.", Toast.LENGTH_LONG).show();
+			} else {
+					ParseUser.logInInBackground(usernameEditText.getText().toString(), passwordEditText.getText().toString(),
+                    new LogInCallback() {
+			@Override
+					public void done(ParseUser user, ParseException e) {
+                    if (e == null) {
+                        Toast.makeText(getApplicationContext(), "Congratulations! You have Logged in successfully", Toast.LENGTH_SHORT).show();
+                        Log.i("LoginStatus", "Successful");
+                        showUserList();
+                    } else {
+						Toast.makeText(getApplicationContext(), ee.getMessage().substring(ee.getMessage().indexOf(" ")), Toast.LENGTH_SHORT).show();
+                                    Log.i("errorMsg", ee.getMessage());
+                            }
+
+                           
+//  Parse logout
+			ParseUser.getCurrentUser().logOut();
+			
+			
+// Create New Parse Object
+					ParseObject tweet = new ParseObject("Tweet");
+
+                    tweet.put("username", ParseUser.getCurrentUser().getUsername());
+
+                    tweet.put("tweet", tweetContentEditText.getText().toString());
+
+                    tweet.saveInBackground(new SaveCallback() {
+                        @Override
+                        public void done(ParseException e) {
+
+                            if (e == null) {
+
+                                Toast.makeText(ListActivity.this, "Tweet sent succesfully!", Toast.LENGTH_SHORT).show();
+
+                            } else {
+
+                                Toast.makeText(ListActivity.this, "Tweet failed - please try again later.", Toast.LENGTH_SHORT).show();
+
+                            }
+							
+							
+//gET Parse object created
+					ParseQuery<ParseObject> query= ParseQuery.getQuery("Tweet");
+					query.whereContainedIn("username", ParseUser.getCurrentUser().getList("isFollowing"));
+					query.orderByDescending("createdAt");
+					query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+					public void done(List<ParseObject> objects, ParseException e) {
+					if(e==null){
+						if(objects.size()>0){
+                        ArrayList<String> lan= new ArrayList<String>();
+                        ArrayList<String> man= new ArrayList<String>();
+              //  List<Map<String, String>> tweetdata= new ArrayList<Map<String, String>>();
+                       
+					   for(ParseObject tweet: objects){
+                            Map<String, String> tweetInfo= new HashMap<String, String>();
+                            lan.add( tweet.getString("tweet"));
+                            man.add( tweet.getString("username"));
+
+                        }
+
+
+                        mRecyclerView.setAdapter(new MyAdapter(lan, man));
+                    }
+                }
+
+            }
+
+	

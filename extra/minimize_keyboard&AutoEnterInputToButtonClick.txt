@@ -1,0 +1,26 @@
+      passwordEditText= (EditText) findViewById(R.id.passwordEditText);
+        passwordEditText.setOnKeyListener(this);
+        bRelativeLayout=(RelativeLayout)findViewById(R.id.bRelativeLayout);
+        logoImageView= (ImageView)findViewById(R.id.logoImageView);
+        bRelativeLayout.setOnClickListener(this);
+        logoImageView.setOnClickListener(this);
+   
+   
+   @Override
+    public boolean onKey(View view, int i, KeyEvent keyEvent) {
+        if(i==KeyEvent.KEYCODE_ENTER && keyEvent.getAction()== KeyEvent.ACTION_DOWN){
+            signUp(view);  //it is OnClick xml provided function on button
+        }
+
+        return false;
+    }
+
+    @Override
+    public void onClick(View view) {
+        if(view.getId()== R.id.bRelativeLayout || view.getId()== R.id.logoImageView){
+            InputMethodManager inputMethodManager= (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+
+        }
+    }
+}
