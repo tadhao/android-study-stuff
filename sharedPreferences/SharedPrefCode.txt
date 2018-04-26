@@ -1,0 +1,68 @@
+
+                SharedPreferences sharedPreferences= getApplicationContext().getSharedPreferences("com.adhao.tushar.notesapp", Context.MODE_PRIVATE);
+                HashSet<String> set= new HashSet<String>(MainActivity.notes);
+                sharedPreferences.edit().putStringSet("notes", set).apply();
+				
+				then,
+----------------------------------------------------------------------------------------------------------------				
+				
+				SharedPreferences sharedPreferences= getApplicationContext().getSharedPreferences("com.adhao.tushar.notesapp", Context.MODE_PRIVATE);
+				HashSet<String> set= (HashSet<String>) sharedPreferences.getStringSet("notes", null);
+				if(set==null) {
+
+					notes.add("Example notes");
+				}else{
+				notes = new ArrayList(set);
+				}
+				
+				
+========================================================================================================================================================================================================================================				   
+				   
+				   
+				   
+				   SharedPreferences sharedPreferences= this.getSharedPreferences("com.adhao.tushar.memorableplaces", Context.MODE_PRIVATE);
+
+        try {
+
+            ArrayList<String> latitudes= new ArrayList<>();
+            ArrayList<String> longitudes= new ArrayList<>();
+
+            for( LatLng coordinates : MainActivity.locations){
+
+                    latitudes.add(Double.toString(coordinates.latitude));
+                    longitudes.add(Double.toString(coordinates.longitude));
+            }
+
+            sharedPreferences.edit().putString("places", ObjectSerializer.serialize(MainActivity.places)).apply();
+            sharedPreferences.edit().putString("latitudes", ObjectSerializer.serialize(latitudes)).apply();
+            sharedPreferences.edit().putString("longitudes", ObjectSerializer.serialize(longitudes)).apply();
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Toast.makeText(getApplicationContext(),"Location Saved", Toast.LENGTH_LONG).show();
+
+    }
+	----------------------------------------------------------------------------------------------------------------
+	
+        SharedPreferences sharedPreferences= this.getSharedPreferences("com.adhao.tushar.memorableplaces", Context.MODE_PRIVATE);
+
+        ArrayList<String> latitudes= new ArrayList<>();
+        ArrayList<String> longitudes= new ArrayList<>();
+
+        places.clear();
+        latitudes.clear();
+        longitudes.clear();
+        locations.clear();
+
+        try {
+            places=(ArrayList<String>) ObjectSerializer.deserialize(sharedPreferences.getString("places", ObjectSerializer.serialize(new ArrayList<String>())));
+            latitudes=(ArrayList<String>) ObjectSerializer.deserialize(sharedPreferences.getString("latitudes", ObjectSerializer.serialize(new ArrayList<String>())));
+            longitudes=(ArrayList<String>) ObjectSerializer.deserialize(sharedPreferences.getString("longitudes", ObjectSerializer.serialize(new ArrayList<String>())));
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }

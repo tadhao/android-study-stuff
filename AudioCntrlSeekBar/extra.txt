@@ -1,0 +1,10 @@
+For GridView =>
+
+public void beep(View view){
+int id= view.getId();
+String ourId= "";
+ourId= getResourses().getResourseEntryName(id)
+int resourceId= getResourses().getIdentifier(ourId, "FOLDER_NAME", com.tstar.blabla));
+MediaPlayer mPlayer= MediaPlayer.create(this, resourseId);
+mPlayer.start();
+}

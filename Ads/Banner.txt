@@ -1,0 +1,23 @@
+
+    private AdView mAdView;
+@Override
+onCreate(){   
+
+mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+}
+---------------------------------------------------------------------------------------------------------
+
+   <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+       android:layout_gravity="center"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-9614293144065488/9427180455">
+    </com.google.android.gms.ads.AdView>
+
+
+</LinearLayout>

@@ -1,0 +1,55 @@
+Audio=>
+MediaPlayer mPlayer= MediaPlayer.create(this, R.FOLDER_NAME.YOUR_AUDIO_NAME);
+mPlayer.start(); //to start audio
+mPlayer.pause(); //to pause
+-------------------------------------------------------------------------------------------
+
+Controlling Volume & length=>
+
+SeekBar volumeSeek;
+AudioManager audioMng;
+
+SeekBar lengthSeek;
+
+	@Override
+		onCreate(){
+			volumeSeek= (SeekBar) findViewById(R.id.NAME);
+			lengthSeek= (SeekBar) findViewById(R.id.NAME);
+
+			audioMng= (AudioManager)getSystemService(Context.AUDIO_SERVICE);
+
+			int maxVolume= audioMng.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+			int curVolume= audioMng.getStreamVolume(AudioManager.STREAM_MUSIC);
+
+			volumeSeek.setMax(maxVolume);
+			volumeSeek.setProgress(curVolume);
+
+
+		volumeSeek.setOnSeekBarListener(new OnSeekBarChangeistener{
+		@Override
+			onProgressChanged(SeekBar seekBar, int progress, Boolean fromUser){
+				Log.i("progress value", Integer.toString(progress));
+				audioMng.setStreamVolume(AudioManager.STREAM_MUSIC,progress,0);
+				}
+					});
+
+
+	newTimerr().sheduleAtFixedRate(new TimerTask{
+		@Override
+			public void run(){
+			lengthSeek.setProgress(mPlayer.getCurrentPosition());
+			}
+
+			},0,1000); //0 for instantly start and 1000= 1sec progress time 
+
+	lengthSeek.setMax(mPlayer.getDurration());
+	lengthSeek.setOnSeekBarListener(new OnSeekBarChangeistener{
+		@Override
+			onProgressChanged(SeekBar seekBar, int progress, Boolean fromUser){
+
+				Log.i("progress value", Integer.toString(progress));
+				mPlayer.seekTo(progress);
+				}
+					});
+
+	}

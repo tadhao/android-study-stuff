@@ -98,4 +98,39 @@
 
             }
 
-	
+====================================================================================================================    public  void acceptRequest(View view){
+        ParseQuery<ParseObject> query= new ParseQuery<ParseObject>("Request");
+        query.whereEqualTo("username", intent.getStringExtra("username"));
+        query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> objects, ParseException e) {
+                if(e==null){
+                    if(objects.size()>0){
+                        for(ParseObject object: objects){
+                            object.put("driverUsername", ParseUser.getCurrentUser().getUsername());
+                            object.saveInBackground(new SaveCallback() {
+                                @Override
+                                public void done(ParseException e) {
+                                    if(e==null){
+                                        Intent directionIntent = new Intent(Intent.ACTION_VIEW,
+                                        Uri.parse("http://maps.google.com/maps?saddr="
+                                                + intent.getDoubleExtra("driverLatitude", 0)
+                                                + ","
+                                                + intent.getDoubleExtra("driverLongitude", 0)
+                                                + "&daddr="
+                                                + intent.getDoubleExtra("requestLatitude", 0)
+                                                +","
+                                                + intent.getDoubleExtra("requestLongitude", 0)));
+                                        startActivity(directionIntent);
+                                    }
+
+                                    }
+                            });
+
+                        }
+                    }
+                }
+            }
+        });
+
+    }	

@@ -1,0 +1,27 @@
+package com.tstar3.dell.imp;
+
+/**
+ * Created by Dell on 08/07/2017.
+ */
+
+public class UserInfo {
+    public String name1;
+    public String apti;
+    public String gd;
+    public String overall;
+    public String interview;
+
+
+    public UserInfo(){
+
+    }
+    public UserInfo(String name1, String apti, String gd, String overall, String interview){
+        this.name1 = name1;
+        this.apti = apti;
+        this.gd = gd;
+        this.overall=overall;
+        this.interview=interview;
+
+
+    }
+}

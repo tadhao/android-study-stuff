@@ -1,0 +1,24 @@
+//String abc= "tushar";
+//ArrayList<String> abc= new ArrayList<String>(asList("tushar","vaishnavi"));
+ArrayList<String> abc= new ArrayList<String>();
+abc.add("tushar");
+abc.add("vaishnavi"")
+//int xyz= "33";
+//ArrayList<Integer> abc= new ArrayList<Integer>(asList("22","18"));
+
+SQLiteDatabase data= this.openOrCreateDatabase("Users",MODE_PRIVATE,null);
+data.execSQL("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, freinds VARCHAR, age INTEGER)");
+String data2= "INSERT INTO users (friends, age) VALUES (?, ?)";
+SQLStatement statement= data.compileStatement(data2);
+statement.bindString(1, abc);
+statement.bindString(2, xyz);
+
+Cursor c= data.rawQuery("SELECT * FROM users", null);
+int freindIndex= c.getColumnIndex("friends");
+int ageIndex= c.getColumnIndex("age")
+while(c.moveToFirst()){
+Log.i("Friends", c.getStringIndex(friendIndex));
+Log.i("Age", c.getStringIndex(ageIndex));
+}
+===============================================================================================================
+

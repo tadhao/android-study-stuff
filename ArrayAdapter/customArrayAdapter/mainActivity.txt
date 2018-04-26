@@ -1,0 +1,36 @@
+package com.adhao.tushar.customarrayadapter;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+
+import android.widget.ListView;
+
+import java.util.ArrayList;
+
+public class MainActivity extends AppCompatActivity {
+
+    private ListView listView;
+    private MovieAdapter mAdapter;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        listView = (ListView) findViewById(R.id.movies_list);
+        ArrayList<Movie> moviesList = new ArrayList<>();
+        moviesList.add(new Movie(R.drawable.me23, "After Earth" , "2013"));
+        moviesList.add(new Movie(R.drawable.me23, "Baby Driver" , "2017"));
+        moviesList.add(new Movie(R.drawable.me23, "Deadpool" , "2016"));
+        moviesList.add(new Movie(R.drawable.me23, "Divergent" , "2014"));
+        moviesList.add(new Movie(R.drawable.me23, "Fight Club" , "1999"));
+        moviesList.add(new Movie(R.drawable.me23, "Jaws" , "1975"));
+        moviesList.add(new Movie(R.drawable.me23, "Pirates of the Caribbean" , "2011"));
+        moviesList.add(new Movie(R.drawable.me23, "Star Wars" , "2016"));
+        moviesList.add(new Movie(R.drawable.me23, "The Grey" , "2011"));
+
+        mAdapter = new MovieAdapter(this,moviesList);
+        listView.setAdapter(mAdapter);
+
+    }
+}

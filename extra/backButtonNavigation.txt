@@ -1,0 +1,10 @@
+Manifest=>
+
+  <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.tstar3.dell.imp.MainActivity" />
+        </activity>
+----------------------------------------------------------------------------------------------
+oncreate(){
+getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+}
