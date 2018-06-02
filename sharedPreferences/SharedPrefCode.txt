@@ -1,18 +1,24 @@
 
-                SharedPreferences sharedPreferences= getApplicationContext().getSharedPreferences("com.adhao.tushar.notesapp", Context.MODE_PRIVATE);
+                SharedPreferences sharedPreferences= getApplicationContext().getSharedPreferences
+							("com.adhao.tushar.notesapp", Context.MODE_PRIVATE);
                 HashSet<String> set= new HashSet<String>(MainActivity.notes);
+
                 sharedPreferences.edit().putStringSet("notes", set).apply();
 				
 				then,
-----------------------------------------------------------------------------------------------------------------				
+-----------------------------------------------------------------------------------------------------------------				
 				
-				SharedPreferences sharedPreferences= getApplicationContext().getSharedPreferences("com.adhao.tushar.notesapp", Context.MODE_PRIVATE);
-				HashSet<String> set= (HashSet<String>) sharedPreferences.getStringSet("notes", null);
+				SharedPreferences sharedPreferences= getApplicationContext()
+								.getSharedPreferences
+								("com.adhao.tushar.notesapp", 
+								Context.MODE_PRIVATE);
+				HashSet<String> set= (HashSet<String>) sharedPreferences
+							.getStringSet("notes", null);
 				if(set==null) {
-
 					notes.add("Example notes");
+						  
 				}else{
-				notes = new ArrayList(set);
+					notes = new ArrayList(set);
 				}
 				
 				
@@ -20,7 +26,8 @@
 				   
 				   
 				   
-				   SharedPreferences sharedPreferences= this.getSharedPreferences("com.adhao.tushar.memorableplaces", Context.MODE_PRIVATE);
+	SharedPreferences sharedPreferences= this
+			.getSharedPreferences("com.adhao.tushar.memorableplaces", Context.MODE_PRIVATE);
 
         try {
 
@@ -45,9 +52,10 @@
         Toast.makeText(getApplicationContext(),"Location Saved", Toast.LENGTH_LONG).show();
 
     }
-	----------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
 	
-        SharedPreferences sharedPreferences= this.getSharedPreferences("com.adhao.tushar.memorableplaces", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences= this.getSharedPreferences("com.adhao.tushar.memorableplaces", 
+											Context.MODE_PRIVATE);
 
         ArrayList<String> latitudes= new ArrayList<>();
         ArrayList<String> longitudes= new ArrayList<>();

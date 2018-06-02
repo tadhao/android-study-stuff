@@ -1,4 +1,4 @@
-   ArrayList<String> titles= new ArrayList<>();
+    ArrayList<String> titles= new ArrayList<>();
     ArrayList<String> content= new ArrayList<>();
     ArrayAdapter arrayAdapter;
     SQLiteDatabase sqLiteDB;
@@ -17,8 +17,10 @@
                 startActivity(intent);
             }
         });
-		sqLiteDB= this.openOrCreateDatabase("Articles", MODE_PRIVATE, null);// null for error catching method name
-        sqLiteDB.execSQL("CREATE TABLE IF NOT EXISTS articles (id INTEGER PRIMARY KEY, articleId INTEGER, title VARCHAR, content VARCHAR)");
+		sqLiteDB= this.openOrCreateDatabase("Articles", MODE_PRIVATE, null);
+								// null for error catching method name
+        sqLiteDB.execSQL("CREATE TABLE IF NOT EXISTS articles (id INTEGER PRIMARY KEY, 
+							articleId INTEGER, title VARCHAR, content VARCHAR)");
 		}
 		
 						Log.i("articleContent", articleContent);

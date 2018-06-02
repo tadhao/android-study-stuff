@@ -12,13 +12,17 @@ String data2= "INSERT INTO users (friends, age) VALUES (?, ?)";
 SQLStatement statement= data.compileStatement(data2);
 statement.bindString(1, abc);
 statement.bindString(2, xyz);
+ statement.execute();
 
 Cursor c= data.rawQuery("SELECT * FROM users", null);
 int freindIndex= c.getColumnIndex("friends");
 int ageIndex= c.getColumnIndex("age")
-while(c.moveToFirst()){
+c.moveToFirst()
+ do{
 Log.i("Friends", c.getStringIndex(friendIndex));
 Log.i("Age", c.getStringIndex(ageIndex));
-}
+ } while(c.moveToNext());
+
+
 ===============================================================================================================
 
